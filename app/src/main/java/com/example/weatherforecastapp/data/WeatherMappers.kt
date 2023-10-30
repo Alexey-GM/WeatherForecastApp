@@ -2,14 +2,26 @@ package com.example.weatherforecastapp.data
 
 import com.example.weatherforecastapp.data.nw.WeatherNW
 import com.example.weatherforecastapp.domain.model.Weather
+import com.example.weatherforecastapp.domain.model.WeatherDetails
 
-private const val ICON_LINK_PATTERN = "https://openweathermap.org/img/w/"
-private const val ICON_LINK_FORMAT = ".png"
-fun WeatherNW.Weather.toDomain(city: WeatherNW.City) =
-    Weather(
-        city = city.name,
-        temperature = main.temp,
-        pressure = main.pressure,
-        dateTime = dtTxt,
-        iconLink = ICON_LINK_PATTERN + weather.first().icon + ICON_LINK_FORMAT
-    )
+fun WeatherNW.toDomain(): List<Weather> {
+    val city = this.city.name
+    val weatherDetailsMap = this.list.groupBy { it.dtTxt.split(" ")[0] } // Группировка по датам
+
+    return weatherDetailsMap.map { (date, weatherNWList) ->
+        val averageTemp = weatherNWList.map { it.main.temp.toInt() }.average().toInt()
+        val weatherDetailsList = weatherNWList.map { weatherNW ->
+            val datetime = weatherNW.dtTxt
+            val temp = weatherNW.main.temp.toInt()
+            val feelsLike = weatherNW.main.feelsLike.toInt()
+            val humidity = weatherNW.main.humidity
+            val pressure = weatherNW.main.pressure
+            val wind = weatherNW.wind.speed
+            val main = weatherNW.weather.firstOrNull()?.main ?: ""
+            val description = weatherNW.weather.firstOrNull()?.description ?: ""
+            WeatherDetails(datetime, temp, feelsLike, humidity, pressure, wind, main, description)
+        }
+
+        Weather(city, date, averageTemp, weatherDetailsList)
+    }
+}

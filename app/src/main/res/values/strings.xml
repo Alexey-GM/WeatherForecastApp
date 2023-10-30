@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WeatherForecastApp</string>
     <string name="celsius">%1$d℃</string>
+    <string name="week">This Week</string>
 </resources>

@@ -40,6 +40,7 @@ class WeatherFragment : Fragment() {
     private fun observeViewModel() {
         weatherModel.weather.observe(viewLifecycleOwner) { weather ->
             adapter.submitList(weather)
+            binding.tvCity.text = weather.first().city
         }
     }
 

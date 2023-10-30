@@ -17,9 +17,9 @@ class WeatherRepositoryImpl(private val api: WeatherAPIService) : WeatherReposit
                 language = LANGUAGE,
                 city = city
             )
-            result.list.map { it.toDomain(result.city) }
+            result.toDomain()
         } catch (error: Throwable) {
-            emptyList<Weather>()
+            emptyList()
         }
     }
 }

@@ -5,12 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.ItemWeatherColdBinding
 import com.example.weatherforecastapp.databinding.ItemWeatherHotBinding
 import com.example.weatherforecastapp.domain.model.Weather
-import kotlin.math.roundToInt
 
 private const val COLD_WEATHER = 0
 private const val HOT_WEATHER = 1
@@ -48,7 +46,7 @@ class WeatherAdapter() : ListAdapter<Weather, RecyclerView.ViewHolder>(WeatherIt
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position).temperature >= 5) HOT_WEATHER else COLD_WEATHER
+        return if (getItem(position).averageTemp >= 5) HOT_WEATHER else COLD_WEATHER
     }
 }
 
@@ -56,11 +54,10 @@ class WeatherViewHolderHot(
     private val binding: ItemWeatherHotBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(itemWeather: Weather) {
-        val temp = itemWeather.temperature.roundToInt()
+        val temp = itemWeather.averageTemp
         binding.tvTemperature.text = binding.root.context.getString(R.string.celsius, temp)
-        binding.tvPressure.text = itemWeather.pressure.toString()
-        binding.tvDateTime.text = itemWeather.dateTime
-        Glide.with(binding.root).load(itemWeather.iconLink).into(binding.ivIcon)
+        binding.tvDateTime.text = itemWeather.date
+        binding.tvMain.text = "Cloudy"
     }
 }
 
@@ -68,10 +65,9 @@ class WeatherViewHolderCold(
     private val binding: ItemWeatherColdBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(itemWeather: Weather) {
-        val temp = itemWeather.temperature.roundToInt()
+        val temp = itemWeather.averageTemp
         binding.tvTemperature.text = binding.root.context.getString(R.string.celsius, temp)
-        binding.tvPressure.text = itemWeather.pressure.toString()
-        binding.tvDateTime.text = itemWeather.dateTime
-        Glide.with(binding.root).load(itemWeather.iconLink).into(binding.ivIcon)
+        binding.tvDateTime.text = itemWeather.date
+        binding.tvMain.text = "Cloudy"
     }
 }
