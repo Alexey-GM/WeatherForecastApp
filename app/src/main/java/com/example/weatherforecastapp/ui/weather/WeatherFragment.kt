@@ -8,14 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weatherforecastapp.App
 import com.example.weatherforecastapp.databinding.FragmentWeatherBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
     private val adapter = WeatherAdapter()
-    private val weatherModel: WeatherViewModel by viewModels { MainViewModelFactory(App.repository) }
+    private val weatherModel: WeatherViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
