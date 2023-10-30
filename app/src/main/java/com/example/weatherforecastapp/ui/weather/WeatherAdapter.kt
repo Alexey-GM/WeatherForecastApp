@@ -48,7 +48,7 @@ class WeatherAdapter() : ListAdapter<Weather, RecyclerView.ViewHolder>(WeatherIt
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position).temperature >= 20) HOT_WEATHER else COLD_WEATHER
+        return if (getItem(position).temperature >= 5) HOT_WEATHER else COLD_WEATHER
     }
 }
 

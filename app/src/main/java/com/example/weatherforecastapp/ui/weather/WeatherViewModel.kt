@@ -11,6 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val INITIAL_CITY = "Kemerovo"
+
 @HiltViewModel
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     ViewModel() {
@@ -18,13 +20,13 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     val weather: LiveData<List<Weather>> get() = _weather
 
     init {
-        loadWeather()
+        loadWeather(INITIAL_CITY)
     }
 
-    private fun loadWeather() {
+    fun loadWeather(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val data = weatherRepository.getWeather()
+                val data = weatherRepository.getWeather(city)
                 _weather.postValue(data)
             } catch (_: Throwable) {
             }

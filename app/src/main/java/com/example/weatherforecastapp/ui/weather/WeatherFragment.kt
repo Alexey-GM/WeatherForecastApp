@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -30,6 +31,7 @@ class WeatherFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         observeViewModel()
+        searchViewListener()
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -52,5 +54,19 @@ class WeatherFragment : Fragment() {
             binding.rvWeather.context,
             LinearLayoutManager.VERTICAL
         )
+    }
+
+    private fun searchViewListener() {
+        binding.svSearch.isSubmitButtonEnabled = true
+        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                weatherModel.loadWeather(query.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 }
