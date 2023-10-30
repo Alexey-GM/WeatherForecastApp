@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.openweathermap.org/"
+
 interface WeatherAPIService {
     companion object {
         private val logger: HttpLoggingInterceptor =

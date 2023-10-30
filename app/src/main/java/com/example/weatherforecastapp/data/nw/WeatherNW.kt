@@ -1,6 +1,7 @@
 package com.example.weatherforecastapp.data.nw
 
 import com.google.gson.annotations.SerializedName
+
 data class WeatherNW(
     @SerializedName("cod")
     val cod: String,
