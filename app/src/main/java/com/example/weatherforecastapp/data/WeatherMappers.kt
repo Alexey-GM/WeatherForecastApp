@@ -22,6 +22,6 @@ fun WeatherNW.toDomain(): List<Weather> {
             WeatherDetails(datetime, temp, feelsLike, humidity, pressure, wind, main, description)
         }
 
-        Weather(city, date, averageTemp, weatherDetailsList)
+        Weather(city, date, averageTemp, weatherDetailsList.first().main, weatherDetailsList)
     }
 }

@@ -25,16 +25,16 @@ class WeatherItemDiffCallback : DiffUtil.ItemCallback<Weather>() {
 
 }
 
-class WeatherAdapter() : ListAdapter<Weather, RecyclerView.ViewHolder>(WeatherItemDiffCallback()) {
+class WeatherAdapter(private val onViewClick: (Weather) -> Unit) : ListAdapter<Weather, RecyclerView.ViewHolder>(WeatherItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == HOT_WEATHER) {
             val binding =
                 ItemWeatherHotBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            WeatherViewHolderHot(binding)
+            WeatherViewHolderHot(binding, onViewClick)
         } else {
             val binding =
                 ItemWeatherColdBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            WeatherViewHolderCold(binding)
+            WeatherViewHolderCold(binding, onViewClick)
         }
     }
 
@@ -52,25 +52,33 @@ class WeatherAdapter() : ListAdapter<Weather, RecyclerView.ViewHolder>(WeatherIt
 }
 
 class WeatherViewHolderHot(
-    private val binding: ItemWeatherHotBinding
+    private val binding: ItemWeatherHotBinding,
+    private val onViewClick: (Weather) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(itemWeather: Weather) {
         val temp = itemWeather.averageTemp
         binding.tvTemperature.text = binding.root.context.getString(R.string.celsius, temp)
         binding.tvDateTime.text = itemWeather.date
         binding.tvDayOfWeek.text = getDayOfWeek(itemWeather.date)
-        binding.tvMain.text = "Cloudy"
+        binding.tvMain.text = itemWeather.main
+        binding.btView.setOnClickListener {
+            onViewClick(itemWeather)
+        }
     }
 }
 
 class WeatherViewHolderCold(
-    private val binding: ItemWeatherColdBinding
+    private val binding: ItemWeatherColdBinding,
+    private val onViewClick: (Weather) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(itemWeather: Weather) {
         val temp = itemWeather.averageTemp
         binding.tvTemperature.text = binding.root.context.getString(R.string.celsius, temp)
         binding.tvDateTime.text = itemWeather.date
         binding.tvDayOfWeek.text = getDayOfWeek(itemWeather.date)
-        binding.tvMain.text = "Cloudy"
+        binding.tvMain.text = itemWeather.main
+        binding.btView.setOnClickListener {
+            onViewClick(itemWeather)
+        }
     }
 }
