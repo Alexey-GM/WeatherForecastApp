@@ -6,7 +6,7 @@ import com.example.weatherforecastapp.domain.model.Weather
 
 private const val APP_ID = "625b6fd5c5be3e9c809460446a1fd3e9"
 private const val UNITS = "metric"
-private const val LANGUAGE = "ru"
+private const val LANGUAGE = "en"
 
 class WeatherRepositoryImpl(private val api: WeatherAPIService) : WeatherRepository {
     override suspend fun getWeather(city: String): List<Weather> {

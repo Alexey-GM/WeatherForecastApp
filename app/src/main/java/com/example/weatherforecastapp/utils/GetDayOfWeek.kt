@@ -23,9 +23,9 @@ fun getDayOfWeek(date: String): String {
 
         return when {
             calendar[Calendar.YEAR] == today[Calendar.YEAR] &&
-                    calendar[Calendar.DAY_OF_YEAR] == today[Calendar.DAY_OF_YEAR] -> "today"
+                    calendar[Calendar.DAY_OF_YEAR] == today[Calendar.DAY_OF_YEAR] -> "Today"
             calendar[Calendar.YEAR] == tomorrow[Calendar.YEAR] &&
-                    calendar[Calendar.DAY_OF_YEAR] == tomorrow[Calendar.DAY_OF_YEAR] -> "tomorrow"
+                    calendar[Calendar.DAY_OF_YEAR] == tomorrow[Calendar.DAY_OF_YEAR] -> "Tomorrow"
             else -> {
                 val sdfDayOfWeek = SimpleDateFormat("EEEE", Locale.US)
                 sdfDayOfWeek.format(dateResult)

@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_light"
-        android:textSize="28sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvCity"
-        app:layout_constraintBottom_toBottomOf="@id/tvCity"
         tools:text="21:30" />
 
     <ImageView
@@ -56,11 +56,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat_light"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tvToday"
-        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintBottom_toBottomOf="@id/tvToday"
         tools:text="2023-10-28" />
 
     <TextView
@@ -68,10 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/montserrat_medium"
         android:textSize="72sp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/tvToday"
         tools:text="10°" />
 
@@ -82,8 +82,8 @@
         android:layout_marginStart="12dp"
         android:fontFamily="@font/montserrat_light"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/tvTemperature"
         app:layout_constraintBottom_toBottomOf="@id/tvTemperature"
+        app:layout_constraintStart_toEndOf="@id/tvTemperature"
         app:layout_constraintTop_toTopOf="@id/tvTemperature"
         app:layout_constraintVertical_bias="0.6"
         tools:text="Snow" />
@@ -100,16 +100,161 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/montserrat_light"
-        android:textSize="62sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintVertical_bias="0.6"
-        app:layout_constraintTop_toBottomOf="@id/tvTemperature"
-        app:layout_constraintHorizontal_bias="0"
         android:ellipsize='none'
-        android:minLines="2"
-        tools:text="Light \nsnow"
-        android:lineHeight="64dp"/>
+        android:fontFamily="@font/montserrat_medium"
+        android:lineHeight="42dp"
+        android:minLines="3"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/humidityChip"
+        app:layout_constraintVertical_bias="0.6"
+        tools:text="переменная\nоблачность" />
+
+    <LinearLayout
+        android:id="@+id/windChips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_background"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTemperature">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/baseline_wind_24" />
+
+        <TextView
+            android:id="@+id/tvWind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/wind"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvWindSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_light"
+        app:layout_constraintEnd_toEndOf="@id/windChips"
+        app:layout_constraintTop_toBottomOf="@id/windChips"
+        tools:text="3.4 km/h" />
+
+    <LinearLayout
+        android:id="@+id/pressureChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/textview_background"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWindSpeed">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/baseline_pressure_24" />
+
+        <TextView
+            android:id="@+id/tvPressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/pressure"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPressureValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_light"
+        app:layout_constraintEnd_toEndOf="@id/pressureChip"
+        app:layout_constraintTop_toBottomOf="@id/pressureChip"
+        tools:text="1016 hPa" />
+
+    <LinearLayout
+        android:id="@+id/humidityChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/textview_background"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPressureValue">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/baseline_humidity_24" />
+
+        <TextView
+            android:id="@+id/tvHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/humidity"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvHumidityValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_light"
+        app:layout_constraintEnd_toEndOf="@id/humidityChip"
+        app:layout_constraintTop_toBottomOf="@id/humidityChip"
+        tools:text="30%" />
+
+    <ImageView
+        android:id="@+id/lineUpOfRV"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTimes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/lineUnderRV"
+        app:layout_constraintEnd_toEndOf="@id/lineUpOfRV"
+        app:layout_constraintStart_toStartOf="@id/lineUpOfRV"
+        app:layout_constraintTop_toBottomOf="@id/lineUpOfRV" />
+
+    <ImageView
+        android:id="@+id/lineUnderRV"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
