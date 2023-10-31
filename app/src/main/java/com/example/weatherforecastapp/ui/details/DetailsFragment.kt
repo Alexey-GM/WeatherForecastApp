@@ -1,17 +1,21 @@
 package com.example.weatherforecastapp.ui.details
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.db.williamchart.ExperimentalFeature
+import com.db.williamchart.slidertooltip.SliderTooltip
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.FragmentDetailsBinding
 import com.example.weatherforecastapp.domain.model.Weather
 import com.example.weatherforecastapp.utils.getDayOfWeek
+import kotlin.math.roundToInt
 
 private const val ARG_PARAM = "Weather"
-
+private const val ANIMATION_DURATION = 1000L
 class DetailsFragment : Fragment() {
     companion object {
         @JvmStatic
@@ -43,7 +47,8 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initTextViews()
+        initChart()
     }
 
     override fun onDestroyView() {
@@ -51,9 +56,8 @@ class DetailsFragment : Fragment() {
         _binding = null
     }
 
-    private fun initView() {
+    private fun initTextViews() {
         binding.tvCity.text = weather?.city
-        binding.tvTime.text = weather?.details?.first()?.datetime?.split(" ")?.last()?.removeRange(5..7)
         binding.tvToday.text = getDayOfWeek(weather!!.date)
         binding.tvDateTime.text = weather?.date
         val temp = weather?.details?.first()?.temp
@@ -75,5 +79,26 @@ class DetailsFragment : Fragment() {
         val humidity = weather?.details?.first()?.humidity.toString()
         binding.tvHumidityValue.text =
             binding.root.context.getString(R.string.humidity_value, humidity)
+    }
+
+    @OptIn(ExperimentalFeature::class)
+    private fun initChart() {
+        val lineSet = weather?.details?.mapIndexed { _, weatherDetails ->
+            weatherDetails.datetime.split(" ").last()
+                .removeRange(5..7) to weatherDetails.temp.toFloat()
+        } ?: emptyList()
+
+        binding.lineChart.labelsFormatter = { "${it.roundToInt()}" }
+        binding.lineChart.gradientFillColors =
+            intArrayOf(
+                Color.parseColor("#81FFFFFF"),
+                Color.TRANSPARENT
+            )
+        binding.lineChart.animation.duration = ANIMATION_DURATION
+        binding.lineChart.tooltip =
+            SliderTooltip().also {
+                it.color = Color.WHITE
+            }
+        binding.lineChart.animate(lineSet)
     }
 }
