@@ -9,6 +9,7 @@ import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.ItemWeatherColdBinding
 import com.example.weatherforecastapp.databinding.ItemWeatherHotBinding
 import com.example.weatherforecastapp.domain.model.Weather
+import com.example.weatherforecastapp.utils.getDayOfWeek
 
 private const val COLD_WEATHER = 0
 private const val HOT_WEATHER = 1
@@ -57,6 +58,7 @@ class WeatherViewHolderHot(
         val temp = itemWeather.averageTemp
         binding.tvTemperature.text = binding.root.context.getString(R.string.celsius, temp)
         binding.tvDateTime.text = itemWeather.date
+        binding.tvDayOfWeek.text = getDayOfWeek(itemWeather.date)
         binding.tvMain.text = "Cloudy"
     }
 }
@@ -68,6 +70,7 @@ class WeatherViewHolderCold(
         val temp = itemWeather.averageTemp
         binding.tvTemperature.text = binding.root.context.getString(R.string.celsius, temp)
         binding.tvDateTime.text = itemWeather.date
+        binding.tvDayOfWeek.text = getDayOfWeek(itemWeather.date)
         binding.tvMain.text = "Cloudy"
     }
 }

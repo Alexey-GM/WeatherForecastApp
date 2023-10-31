@@ -47,14 +47,6 @@ class WeatherFragment : Fragment() {
     private fun initRecyclerView() {
         binding.rvWeather.adapter = adapter
         binding.rvWeather.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvWeather.addItemDecoration(createItemDecoration())
-    }
-
-    private fun createItemDecoration(): DividerItemDecoration {
-        return DividerItemDecoration(
-            binding.rvWeather.context,
-            LinearLayoutManager.VERTICAL
-        )
     }
 
     private fun searchViewListener() {
