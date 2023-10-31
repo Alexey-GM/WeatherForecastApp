@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">WeatherForecastApp</string>
+    <string name="celsius">%1$d℃</string>
+    <string name="celsius_details">%1$d°</string>
+    <string name="week">This Week</string>
+    <string name="view">View ></string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="description">%1$s\n%2$s\n%3$s</string>
+    <string name="wind_value">%1$s km/h</string>
+    <string name="pressure_value">%1$s hPa</string>
+    <string name="humidity_value" >%1$s %%</string>
 </resources>
