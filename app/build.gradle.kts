@@ -42,6 +42,13 @@ android {
 
 dependencies {
 
+    // Charts
+    implementation ("com.diogobernardino:williamchart:3.11.0")
+
+// Tooltips
+    implementation ("com.diogobernardino.williamchart:tooltip-slider:3.11.0")
+    implementation ("com.diogobernardino.williamchart:tooltip-points:3.11.0")
+    implementation ("com.jakewharton.timber:timber:5.0.1")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

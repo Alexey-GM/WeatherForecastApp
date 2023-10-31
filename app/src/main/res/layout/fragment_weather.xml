@@ -1,13 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.weather.WeatherFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/searchview_outline"
+        app:layout_constraintBottom_toTopOf="@id/tvCity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_place_24"
+        app:layout_constraintBottom_toBottomOf="@id/tvCity"
+        app:layout_constraintEnd_toStartOf="@id/tvCity"
+        app:layout_constraintTop_toTopOf="@id/tvCity" />
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/montserrat_light"
+        android:textColor="@color/text_white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/svSearch"
+        tools:text="Kemerovo" />
+
+    <TextView
+        android:id="@+id/tvThisWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/week"
+        android:textColor="@color/text_white"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCity" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWeather"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvThisWeek" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
